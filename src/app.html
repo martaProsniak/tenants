@@ -3,6 +3,14 @@
     <h3>Disabled: ${summary.tenantDisabledCount}</h3>
     <h3>Demo: ${summary.tenantDemosCount}</h3>
   <h1>${message}</h1>
+
+  <label>Filter:<br>
+    <select value.bind='criterium' change.trigger="filterTenants(criterium)">
+        <option repeat.for="item of criteria" value.bind="item">${item}</option>
+      </select>
+  </label>
+
+  <button click.trigger="filterTenants(criterium)">${criterium}</button>
   <div repeat.for="tenant of tenants">
     <span class="mx-2">${tenant.TenantDisplayName}</span>
     <span class="mx-2">${tenant.IsEnabled}</span>

@@ -7,65 +7,97 @@ export class TenantsRepository {
   constructor(tenantsService) {
     this.tenantsService = tenantsService;
     this.tenantsDb = null;
-    this.tenantsMetaSummary = {}
-    console.log('Repository injected!')
-
+    this.filterCriteria = ['All tenants', 'Demos', 'Enabled', 'Disabled']
   }
 
   getTenantsDatabase() {
     let promise = new Promise((resolve, reject) => {
-      if (!this.tenantsDatabase) {
         this.tenantsService.getTenantsDatabase()
           .then(result => {
             this.tenantsDb = JSON.parse(result.response);
             console.log(this.tenantsDb)
+            this.prepareData()
             resolve(this.tenantsDb)
           })
-      }
-      else {
-        (resolve(this.tenantsDb))
-      }
-    });
+      });
     return promise;
   }
 
-  prepareData() {
-    this.tenants = this.getAndSortTenants();
-    this.tenantsMetadata = this.getTenantsMetadata();
-    this.tenantsMetaSummary = this.getTenantsMetaSummary();
-    this.tenantsDisplay = this.prepareTenantsDisplay();
-    console.log(this.tenantsDb, this.tenants, this.tenantsMetadata, this.tenantsDisplay, this.tenantsMetaSummary)
+  filterTenants(filterCriteria) {
+    let filteredTenants = []
+    if (filterCriteria === this.filterCriteria[0]) {
+      console.log(this.filterCriteria[0], filterCriteria)
+      return this.tenants;
+    }
+    else if (filterCriteria === this.filterCriteria[1]) {
+      this.tenants.forEach(tenant => {
+        if (tenant.IsDemoTenant) {
+          console.log(this.filterCriteria[1], filterCriteria)
+          filteredTenants.push(tenant)
+        }
+      });
+    }
+    else if (filterCriteria === this.filterCriteria[2]) {
+      this.tenants.forEach(tenant => {
+        if (tenant.IsEnabled) {
+          console.log(this.filterCriteria[2], filterCriteria)
+          filteredTenants.push(tenant)
+        }
+      });
+    }
+    else if (filterCriteria === this.filterCriteria[3]) {
+      this.tenants.forEach(tenant => {
+        if (!tenant.IsEnabled) {
+          console.log(this.filterCriteria[3], filterCriteria)
+          filteredTenants.push(tenant)
+        }
+      });
+    }
+    return filteredTenants;
   }
 
-  getAndSortTenants() {
-    let tenants = this.tenantsDb.tenants.sort((a, b) =>
-      a.DateCreated >= b.DateCreated ? 1 : -1);
-    return tenants;
+  prepareData() {
+    this.tenantsRaw = this.getTenants();
+    this.tenantsMetadata = this.getTenantsMetadata();
+    this.tenantsMetaSummary = this.getTenantsMetaSummary();
+    this.tenants = this.prepareTenantsDisplay();
+  }
+
+  getTenants() {
+    return this.tenantsDb.tenants;
   }
 
   getTenantsMetadata() {
-    let tenantsMetadata = this.tenantsDb.tenantsMetadata;
-    return tenantsMetadata;
+    return this.tenantsDb.tenantsMetadata;
   }
 
-  mergeTenantsData() {
-    let mergedTenants = this.tenantsMetadata.map(tenantMeta =>
-      Object.assign({}, tenantMeta, this.tenants.find(tenant =>
+  mergeTenantsData(tenantsRaw, tenantsMetadata) {
+    let mergedTenants = tenantsMetadata.map(tenantMeta =>
+      // find tenant by id and merge into one object
+      Object.assign({}, tenantMeta, tenantsRaw.find(tenant =>
         tenant.TenantId === tenantMeta.TenantId) || {})
     );
     return mergedTenants;
   }
 
   prepareTenantsDisplay() {
-    let tenantsDisplay = this.mergeTenantsData();
-    tenantsDisplay.forEach(tenant => {
+    // merge tenants info into one array
+    let tenants = this.mergeTenantsData(this.tenantsRaw, this.tenantsMetadata);
+    tenants.forEach(tenant => {
+      // format date
       let dateCreated = moment(tenant.DateCreated)
         .format("MM.DD.YYYY, HH:mm:ss");
       tenant.DateCreated = dateCreated;
     })
-    return tenantsDisplay;
+    //sort by date
+    tenants = this.sortByDate(tenants);
+    return tenants;
   }
 
+  sortByDate(tenants){
+    tenants.sort((a, b) => a.DateCreated >= b.DateCreated ? 1 : -1);
+    return tenants;
+  }
 
   getTenantsMetaSummary() {
     let tenantDemosCount = 0;
