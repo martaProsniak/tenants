@@ -1,4 +1,12 @@
 <template>
+    <h3>Enabled: ${summary.tenantEnabledCount}</h3>
+    <h3>Disabled: ${summary.tenantDisabledCount}</h3>
+    <h3>Demo: ${summary.tenantDemosCount}</h3>
   <h1>${message}</h1>
-
+  <div repeat.for="tenant of tenants">
+    <span class="mx-2">${tenant.TenantDisplayName}</span>
+    <span class="mx-2">${tenant.IsEnabled}</span>
+    <span class="mx-2">${tenant.DateCreated }</span>
+    <span class="mx-2">${tenant.IsDemoTenant}</span>
+  </div>
 </template>

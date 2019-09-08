@@ -8,8 +8,15 @@ export class App {
     this.tenantsRepository = tenantsRepository;
     this.tenantsDb = [];
   }
-
+  
   activate(){
-   this.tenantsRepository.getTenantsDatabase();
+    this.tenantsRepository.getTenantsDatabase()
+    .then((result) => {
+      this.tenantsRepository.prepareData();
+      this.tenants = this.tenantsRepository.tenantsDisplay
+      this.summary = this.tenantsRepository.tenantsMetaSummary;
+      console.log(result)
+    });
+    
   }
 }
