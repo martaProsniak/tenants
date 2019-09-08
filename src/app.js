@@ -10,6 +10,6 @@ export class App {
   }
 
   activate(){
-   
+   this.tenantsRepository.getTenantsDatabase();
   }
 }

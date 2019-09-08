@@ -10,6 +10,11 @@ export class TenantsRepository{
   }
 
   getTenantsDatabase(){
-
+    this.tenantsService.getTenantsDatabase()
+    .then(result => {
+      this.tenantsDb = result;
+      console.log(this.tenantsDb)
+    })
+    .catch(err => console.log(err));
   }
 }
