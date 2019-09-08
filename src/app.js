@@ -14,16 +14,29 @@ export class App {
     this.tenantsRepository.getTenantsDatabase()
     .then(() => {
       this.tenantsRepository.prepareData();
-      this.tenants = this.tenantsRepository.tenants
+      this.tenantsRaw = this.tenantsRepository.tenants
+      this.tenants = this.tenantsRaw
       this.summary = this.tenantsRepository.tenantsMetaSummary;
     });
   }
 
   filterTenants(criteria){
-    this.tenants = this.tenantsRepository.filterTenants(criteria);
+    this.filterCriteria = criteria;
+    //check if search is active
+    if(this.searchCriteria){
+      this.tenants = this.tenantsRepository.searchTenants(this.searchCriteria, this.tenantsRaw);
+    } else this.tenants = this.tenantsRaw
+
+    this.tenants = this.tenantsRepository.filterTenants(criteria, this.tenants);
   }
 
   searchTenants(criteria){
-    this.tenants = this.tenantsRepository.searchTenants(criteria);
+    this.searchCriteria = criteria;
+    //check if filter is active
+    if(this.filterCriteria){
+      this.tenants = this.tenantsRepository.filterTenants(this.filterCriteria, this.tenantsRaw);
+    } else this.tenants = this.tenantsRaw
+
+    this.tenants = this.tenantsRepository.searchTenants(criteria, this.tenants);
   }
 }

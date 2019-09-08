@@ -6,7 +6,7 @@
 
   <label>Filter:<br>
     <select value.bind='filterCriteria' change.trigger="filterTenants(filterCriteria)">
-        <option repeat.for="item of criteria" value.bind="item">${item}</option>
+        <option repeat.for="item of criteria" model.bind="item">${item}</option>
       </select>
   </label>
 

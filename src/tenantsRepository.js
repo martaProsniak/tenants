@@ -16,33 +16,33 @@ export class TenantsRepository {
           .then(result => {
             this.tenantsDb = JSON.parse(result.response);
             this.prepareData()
-            resolve(this.tenantsDb)
+            resolve(this.tenants)
           })
       });
     return promise;
   }
 
-  filterTenants(filterCriteria) {
+  filterTenants(filterCriteria, tenants) {
     let filteredTenants = []
     if (filterCriteria === this.filterCriteria[0]) {
-      return this.tenants;
+      return tenants;
     }
     else if (filterCriteria === this.filterCriteria[1]) {
-      this.tenants.forEach(tenant => {
+      tenants.forEach(tenant => {
         if (tenant.IsDemoTenant) {
           filteredTenants.push(tenant)
         }
       });
     }
     else if (filterCriteria === this.filterCriteria[2]) {
-      this.tenants.forEach(tenant => {
+      tenants.forEach(tenant => {
         if (tenant.IsEnabled) {
           filteredTenants.push(tenant)
         }
       });
     }
     else if (filterCriteria === this.filterCriteria[3]) {
-      this.tenants.forEach(tenant => {
+      tenants.forEach(tenant => {
         if (!tenant.IsEnabled) {
           filteredTenants.push(tenant)
         }
@@ -51,15 +51,15 @@ export class TenantsRepository {
     return filteredTenants;
   }
 
-  searchTenants(searchCriteria){
+  searchTenants(searchCriteria, tenants){
     let criteria = searchCriteria.toLowerCase();
     let filteredTenants = [];
-    this.tenants.forEach( tenant => {
+    tenants.forEach( tenant => {
+      console.log(tenant)
       if (tenant.TenantDisplayName.toLowerCase().indexOf(criteria) >= 0){
         filteredTenants.push(tenant)
       }
       else if (tenant.DateCreated.indexOf(criteria) >= 0){
-        console.log(tenant)
         filteredTenants.push(tenant)
       }
     });
