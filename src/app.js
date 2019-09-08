@@ -12,16 +12,18 @@ export class App {
   
   activate(){
     this.tenantsRepository.getTenantsDatabase()
-    .then((result) => {
+    .then(() => {
       this.tenantsRepository.prepareData();
       this.tenants = this.tenantsRepository.tenants
       this.summary = this.tenantsRepository.tenantsMetaSummary;
-      console.log(result)
     });
   }
 
   filterTenants(criteria){
     this.tenants = this.tenantsRepository.filterTenants(criteria);
-    console.log(this.tenants)
+  }
+
+  searchTenants(criteria){
+    this.tenants = this.tenantsRepository.searchTenants(criteria);
   }
 }

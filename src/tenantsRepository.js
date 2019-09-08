@@ -15,7 +15,6 @@ export class TenantsRepository {
         this.tenantsService.getTenantsDatabase()
           .then(result => {
             this.tenantsDb = JSON.parse(result.response);
-            console.log(this.tenantsDb)
             this.prepareData()
             resolve(this.tenantsDb)
           })
@@ -26,13 +25,11 @@ export class TenantsRepository {
   filterTenants(filterCriteria) {
     let filteredTenants = []
     if (filterCriteria === this.filterCriteria[0]) {
-      console.log(this.filterCriteria[0], filterCriteria)
       return this.tenants;
     }
     else if (filterCriteria === this.filterCriteria[1]) {
       this.tenants.forEach(tenant => {
         if (tenant.IsDemoTenant) {
-          console.log(this.filterCriteria[1], filterCriteria)
           filteredTenants.push(tenant)
         }
       });
@@ -40,7 +37,6 @@ export class TenantsRepository {
     else if (filterCriteria === this.filterCriteria[2]) {
       this.tenants.forEach(tenant => {
         if (tenant.IsEnabled) {
-          console.log(this.filterCriteria[2], filterCriteria)
           filteredTenants.push(tenant)
         }
       });
@@ -48,11 +44,25 @@ export class TenantsRepository {
     else if (filterCriteria === this.filterCriteria[3]) {
       this.tenants.forEach(tenant => {
         if (!tenant.IsEnabled) {
-          console.log(this.filterCriteria[3], filterCriteria)
           filteredTenants.push(tenant)
         }
       });
     }
+    return filteredTenants;
+  }
+
+  searchTenants(searchCriteria){
+    let criteria = searchCriteria.toLowerCase();
+    let filteredTenants = [];
+    this.tenants.forEach( tenant => {
+      if (tenant.TenantDisplayName.toLowerCase().indexOf(criteria) >= 0){
+        filteredTenants.push(tenant)
+      }
+      else if (tenant.DateCreated.indexOf(criteria) >= 0){
+        console.log(tenant)
+        filteredTenants.push(tenant)
+      }
+    });
     return filteredTenants;
   }
 

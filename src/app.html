@@ -5,16 +5,22 @@
   <h1>${message}</h1>
 
   <label>Filter:<br>
-    <select value.bind='criterium' change.trigger="filterTenants(criterium)">
+    <select value.bind='filterCriteria' change.trigger="filterTenants(filterCriteria)">
         <option repeat.for="item of criteria" value.bind="item">${item}</option>
       </select>
   </label>
 
-  <button click.trigger="filterTenants(criterium)">${criterium}</button>
+  <label>Search:<br>
+    <input type="text" value.bind="searchCriteria">
+    <button click.trigger="searchTenants(searchCriteria)">Submit</button>
+  </label>
+
   <div repeat.for="tenant of tenants">
     <span class="mx-2">${tenant.TenantDisplayName}</span>
-    <span class="mx-2">${tenant.IsEnabled}</span>
+    <span class="mx-2" if.bind="tenant.IsEnabled">Enabled</span>
+    <span class="mx-2" if.bind="!tenant.IsEnabled">Disabled</span>
     <span class="mx-2">${tenant.DateCreated }</span>
-    <span class="mx-2">${tenant.IsDemoTenant}</span>
+    <span class="mx-2" if.bind="tenant.IsDemoTenant">Demo</span>
+    <span class="mx-2" if.bind="!tenant.IsDemoTenant">No demo</span>
   </div>
 </template>
