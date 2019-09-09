@@ -3,7 +3,7 @@ import {TenantsRepository} from 'tenantsRepository'
 
 @inject(TenantsRepository)
 export class Tenants {
-  message = 'Tenants';
+  title = 'Tenants';
   constructor(tenantsRepository){
     this.tenantsRepository = tenantsRepository;
     this.tenantsDb = [];

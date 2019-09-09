@@ -1,28 +1,44 @@
 <template>
-  <div>
-    <div><p>${summary.tenantEnabledCount}</p><p>Enabled</p></div>
-    <div><p>${summary.tenantDisabledCount}</p><p>Disabled</p></div>
-    <div><p>${summary.tenantDemosCount}</p><p>Demo tenant</p></div>
-    <div><p>${summary.allTenantsCount}</p><p>Tenants</p></div>
-  </div>
+  <section class="tenants container">
+    <h1>${title}</h1>
+    <div class="tenants__summary d-flex">
+      <div class="tenants__summary-item mx-2">
+        <p>${summary.tenantEnabledCount}</p>
+        <p>Enabled</p>
+      </div>
+      <div class="tenants__summary-item mx-2">
+        <p>${summary.tenantDisabledCount}</p>
+        <p>Disabled</p>
+      </div>
+      <div class="tenants__summary-item mx-2">
+        <p>${summary.tenantDemosCount}</p>
+        <p>Demo tenant</p>
+      </div>
+      <div class="tenants__summary-item mx-2">
+        <p>${summary.allTenantsCount}</p>
+        <p>Tenants</p>
+      </div>
+    </div>
 
-  <label>Filter:<br>
-    <select value.bind='filterCriteria' change.delegate="filterTenants(filterCriteria)">
+    <div class="d-flex">
+    <label>Search:<br>
+      <input type="text" value.bind="searchCriteria" keyup.delegate="searchTenants(searchCriteria) & debounce:300">
+      <button click.delegate="searchTenants(searchCriteria)">Submit</button>
+    </label>
+    <label>Filter:<br>
+      <select value.bind='filterCriteria' change.delegate="filterTenants(filterCriteria)">
         <option repeat.for="item of criteria" model.bind="item">${item}</option>
       </select>
-  </label>
-
-  <label>Search:<br>
-    <input type="text" value.bind="searchCriteria" keyup.delegate="searchTenants(searchCriteria) & debounce:300">
-    <button click.delegate="searchTenants(searchCriteria)">Submit</button>
-  </label>
-
-  <div repeat.for="tenant of tenants">
-    <span class="mx-2">${tenant.TenantDisplayName}</span>
-    <span class="mx-2" if.bind="tenant.IsEnabled">Enabled</span>
-    <span class="mx-2" if.bind="!tenant.IsEnabled">Disabled</span>
-    <span class="mx-2">${tenant.DateCreated }</span>
-    <span class="mx-2" if.bind="tenant.IsDemoTenant">Demo</span>
-    <span class="mx-2" if.bind="!tenant.IsDemoTenant">No demo</span>
+    </label>
   </div>
+
+    <div repeat.for="tenant of tenants" class="row">
+      <span class="col-xs-12 col-md-6 tenant">${tenant.TenantDisplayName}</span>
+      <span class="col-xs-12 col-md-6 tenant" if.bind="tenant.IsEnabled">Enabled</span>
+      <span class="col-xs-12 col-md-6 tenant" if.bind="!tenant.IsEnabled">Disabled</span>
+      <span class="col-xs-12 col-md-6 tenant">${tenant.DateCreated }</span>
+      <span class="col-xs-12 col-md-6 tenant" if.bind="tenant.IsDemoTenant">Demo</span>
+      <span class="col-xs-12 col-md-6 tenant" if.bind="!tenant.IsDemoTenant">No demo</span>
+    </div>
+  </section>
 </template>
