@@ -92,13 +92,13 @@ export class TenantsRepository {
   prepareTenantsDisplay() {
     // merge tenants info into one array
     let tenants = this.mergeArrays(this.tenantsRaw, this.tenantsMetadata);
+    tenants = this.sortByDate(tenants);
     tenants.forEach(tenant => {
       // format date
       let dateCreated = moment(tenant.DateCreated)
-        .format("MM.DD.YYYY, HH:mm:ss");
+        .format("DD.MM.YYYY, HH:mm:ss");
       tenant.DateCreated = dateCreated;
     })
-    tenants = this.sortByDate(tenants);
     return tenants;
   }
 
