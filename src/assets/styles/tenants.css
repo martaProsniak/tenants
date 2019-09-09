@@ -69,6 +69,10 @@
 }
 /* END OF HEADER */
 
+.filters, .box{
+  padding: 5px 15px;
+}
+
 
 .filters__label {
   padding: 0;

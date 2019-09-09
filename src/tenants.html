@@ -25,7 +25,7 @@
 
     <hr>
     <div class="container">
-      <div class="filters row">
+      <div class="row filters">
         <label class="filters__label col-xs-12 col-md-8">
           <p class='filters__subtitle'>Search:</p>
           <div class='filters__search'>
@@ -46,7 +46,7 @@
         </label>
       </div>
 
-      <div repeat.for="tenant of tenants" class="row">
+      <div repeat.for="tenant of tenants" class="row box">
         <span class="">${tenant.TenantDisplayName}</span>
         <span class="" if.bind="tenant.IsEnabled">Enabled</span>
         <span class="" if.bind="!tenant.IsEnabled">Disabled</span>
