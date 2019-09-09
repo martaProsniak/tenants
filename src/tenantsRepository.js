@@ -52,6 +52,9 @@ export class TenantsRepository {
   }
 
   searchTenants(searchCriteria, tenants){
+    if(!searchCriteria){
+      return tenants;
+    }
     let criteria = searchCriteria.toLowerCase();
     let filteredTenants = [];
     tenants.forEach( tenant => {

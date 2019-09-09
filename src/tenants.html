@@ -1,49 +1,60 @@
 <template>
-  <require from="./styles/tenants.css"></require>
-  <div class="tenants container">
-    <h1 class="header tenants__header">${title}</h1>
-    <div class="tenants__summary d-flex">
-      <div class="tenants__summary-item">
-        <p class="tenants__summary-count circle circle--blue">${summary.tenantEnabledCount}</p>
-        <p class='tenants__summary-caption'>Enabled</p>
+  <require from="./assets/styles/tenants.css"></require>
+  <section class="section tenants container-fluid">
+    <header class='section__header container'>
+      <h1 class="header__title">${title}</h1>
+      <div class="summary d-flex">
+        <div class="summary__item">
+          <p class="summary__count circle circle--blue">${summary.tenantEnabledCount}</p>
+          <p class='summary-caption'>Enabled</p>
+        </div>
+        <div class="summary__item">
+          <p class="summary__count circle circle--green">${summary.tenantDisabledCount}</p>
+          <p class='summary-caption'>Disabled</p>
+        </div>
+        <div class="summary__item">
+          <p class="summary__count circle circle--red">${summary.tenantDemosCount}</p>
+          <p class='summary-caption'>Demo tenant</p>
+        </div>
+        <div class="summary__item">
+          <p class="summary__count summary__count--bigFont summary__count--absolute">${summary.allTenantsCount}</p>
+          <p class='summary-caption summary-caption--relative'>Tenants</p>
+        </div>
       </div>
-      <div class="tenants__summary-item">
-        <p class="tenants__summary-count circle circle--green">${summary.tenantDisabledCount}</p>
-        <p class='tenants__summary-caption'>Disabled</p>
-      </div>
-      <div class="tenants__summary-item">
-        <p class="tenants__summary-count circle circle--red">${summary.tenantDemosCount}</p>
-        <p class='tenants__summary-caption'>Demo tenant</p>
-      </div>
-      <div class="tenants__summary-item">
-        <p class="tenants__summary-count tenants__summary-count--bigFont">${summary.allTenantsCount}</p>
-        <p class='tenants__summary-caption'>Tenants</p>
-      </div>
-    </div>
+    </header>
 
     <hr>
+    <div class="container">
+      <div class="filters row">
+        <label class="filters__label col-xs-12 col-md-8">
+          <p class='filters__subtitle'>Search:</p>
+          <div class='filters__search'>
+            <input type="text" value.bind="searchCriteria" keyup.delegate="searchTenants(searchCriteria) & debounce:300"
+              placeholder="Search for a tenant..." class="filters__input">
+            <button click.delegate="searchTenants(searchCriteria)" class="filters__submit-button">
+              <span class="glyphicon glyphicon-search icon" aria-hidden="true"></span>
+            </button>
+          </div>
+        </label>
+        <label class='filters__label col-xs-12 col-md-4'>
+          <p class='filters__subtitle'>Filter:</p>
+          <div class="select-box">
+            <select value.bind='filterCriteria' change.delegate="filterTenants(filterCriteria)" class='filters__select'>
+              <option repeat.for="item of criteria" model.bind="item" class="filters__option">${item}</option>
+            </select>
+          </div>
+        </label>
+      </div>
 
-    <div class="tenants__filters">
-      <label class="tenants__search col-xs-8">Search:<br>
-        <input type="text" value.bind="searchCriteria" keyup.delegate="searchTenants(searchCriteria) & debounce:300"
-          placeholder="Search for a tenant...">
-        <button click.delegate="searchTenants(searchCriteria)">Submit</button>
-      </label>
-      <label class='tenants__filter col-xs-4'>Filter:<br>
-        <select value.bind='filterCriteria' change.delegate="filterTenants(filterCriteria)">
-          <option repeat.for="item of criteria" model.bind="item">${item}</option>
-        </select>
-      </label>
+      <div repeat.for="tenant of tenants" class="row">
+        <span class="">${tenant.TenantDisplayName}</span>
+        <span class="" if.bind="tenant.IsEnabled">Enabled</span>
+        <span class="" if.bind="!tenant.IsEnabled">Disabled</span>
+        <span class="">${tenant.DateCreated }</span>
+        <span class="" if.bind="tenant.IsDemoTenant">Demo</span>
+        <span class="" if.bind="!tenant.IsDemoTenant">Not demo</span>
+      </div>
     </div>
 
-    <div repeat.for="tenant of tenants" class="row">
-      <span class="">${tenant.TenantDisplayName}</span>
-      <span class="" if.bind="tenant.IsEnabled">Enabled</span>
-      <span class="" if.bind="!tenant.IsEnabled">Disabled</span>
-      <span class="">${tenant.DateCreated }</span>
-      <span class="" if.bind="tenant.IsDemoTenant">Demo</span>
-      <span class="" if.bind="!tenant.IsDemoTenant">No demo</span>
-    </div>
-    
-  </div>
+  </section>
 </template>

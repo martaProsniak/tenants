@@ -1,0 +1,127 @@
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
+/* HEADER */
+.tenants{
+ color: #276597;
+ font-size: 18px;
+ margin: 25px auto;
+}
+
+.header__title{
+  padding: 0;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+.summary{
+  margin-top: 20px;
+  width: 270px;
+  justify-content: space-between;
+}
+
+.summary__item{
+  margin: 0 auto;
+}
+
+.summary__count{
+  height: 60px;
+  width: 60px;
+  margin: 2.5px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.circle{
+  border: 1.5px solid;
+  border-radius: 50%;
+}
+
+.circle--blue{
+  border-color: #276597;
+}
+
+.circle--green{
+  border-color: green;
+}
+
+.circle--red{
+  border-color: red;
+}
+
+.summary__count--bigFont{
+  font-size: 2.3rem;
+}
+
+.summary__count--absolute{
+  position: absolute;
+}
+
+.summary-caption--relative{
+  position: relative;
+  top: 45%;
+}
+
+.summary-caption{
+  width: 60px;
+  text-align: center;
+  font-size: 0.7rem;
+}
+/* END OF HEADER */
+
+
+.filters__label {
+  padding: 0;
+  margin: 0;
+}
+
+.filters__label{
+  padding-bottom: 25px;
+}
+
+.filters__subtitle{
+  margin-bottom: 10px;
+}
+
+.filters__search{
+  padding: 0;
+  margin: 0 5% 0 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f8f8f8;
+}
+
+.filters__input{
+  width: 80%;
+}
+
+.select-box{
+  height: 50px;
+  width: 95%;
+  background: url('../img/expand-button.png') no-repeat right #f8f8f8;
+}
+
+.filters__input, .filters__select, .filters__submit-button{
+  background-color: #f8f8f8;
+  border: none;
+  height: 50px;
+}
+.filters__submit-button{
+  padding: 0;
+  width: 10%;
+}
+
+
+.filters__select{
+  width: 90%;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+
+
+.filters__option{
+
+}
