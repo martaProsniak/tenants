@@ -55,7 +55,6 @@ export class TenantsRepository {
     let criteria = searchCriteria.toLowerCase();
     let filteredTenants = [];
     tenants.forEach( tenant => {
-      console.log(tenant)
       if (tenant.TenantDisplayName.toLowerCase().indexOf(criteria) >= 0){
         filteredTenants.push(tenant)
       }
@@ -81,7 +80,7 @@ export class TenantsRepository {
     return this.tenantsDb.tenantsMetadata;
   }
 
-  mergeTenantsData(tenantsRaw, tenantsMetadata) {
+  mergeArrays(tenantsRaw, tenantsMetadata) {
     let mergedTenants = tenantsMetadata.map(tenantMeta =>
       // find tenant by id and merge into one object
       Object.assign({}, tenantMeta, tenantsRaw.find(tenant =>
@@ -92,14 +91,13 @@ export class TenantsRepository {
 
   prepareTenantsDisplay() {
     // merge tenants info into one array
-    let tenants = this.mergeTenantsData(this.tenantsRaw, this.tenantsMetadata);
+    let tenants = this.mergeArrays(this.tenantsRaw, this.tenantsMetadata);
     tenants.forEach(tenant => {
       // format date
       let dateCreated = moment(tenant.DateCreated)
         .format("MM.DD.YYYY, HH:mm:ss");
       tenant.DateCreated = dateCreated;
     })
-    //sort by date
     tenants = this.sortByDate(tenants);
     return tenants;
   }
@@ -113,6 +111,7 @@ export class TenantsRepository {
     let tenantDemosCount = 0;
     let tenantEnabledCount = 0;
     let tenantDisabledCount = 0;
+    let allTenantsCount = 0;
 
     this.tenantsMetadata.forEach(tenant => {
       if (tenant.IsDemoTenant) {
@@ -120,6 +119,7 @@ export class TenantsRepository {
       }
       tenant.IsEnabled ? tenantEnabledCount++ : tenantDisabledCount++;
     });
-    return { tenantDemosCount: tenantDemosCount, tenantEnabledCount: tenantEnabledCount, tenantDisabledCount: tenantDisabledCount }
+    allTenantsCount = this.tenantsMetadata.length;
+    return {tenantDemosCount: tenantDemosCount, tenantEnabledCount: tenantEnabledCount, tenantDisabledCount: tenantDisabledCount, allTenantsCount: allTenantsCount}
   }
 }
