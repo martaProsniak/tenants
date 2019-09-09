@@ -47,14 +47,16 @@
       </div>
 
       <div repeat.for="tenant of tenants" class="row box">
-        <span class="">${tenant.TenantDisplayName}</span>
-        <span class="" if.bind="tenant.IsEnabled">Enabled</span>
-        <span class="" if.bind="!tenant.IsEnabled">Disabled</span>
-        <span class="">${tenant.DateCreated }</span>
-        <span class="" if.bind="tenant.IsDemoTenant">Demo</span>
-        <span class="" if.bind="!tenant.IsDemoTenant">Not demo</span>
+        <p class="col-md-10 box__item box__item--main">${tenant.TenantDisplayName}</p>
+        <p class="col-md-2 box__item box__item--right" if.bind="tenant.IsEnabled">Enabled</p>
+        <p class="col-md-2 box__item box__item--right" if.bind="!tenant.IsEnabled">Disabled</p>
+        <p class="col-md-10 box__item box__item--grey">${tenant.DateCreated }</p>
+        <p class="col-md-2 box__item box__item--right" if.bind="tenant.IsDemoTenant">Demo</p>
+        <p class="col-md-2 box__item box__item--right" if.bind="!tenant.IsDemoTenant">Not demo</p>
       </div>
     </div>
+
+    <!-- zrobić order -->
 
   </section>
 </template>
