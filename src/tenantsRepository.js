@@ -123,6 +123,7 @@ export class TenantsRepository {
       tenant.IsEnabled ? tenantEnabledCount++ : tenantDisabledCount++;
     });
     allTenantsCount = this.tenantsMetadata.length;
-    return {tenantDemosCount: tenantDemosCount, tenantEnabledCount: tenantEnabledCount, tenantDisabledCount: tenantDisabledCount, allTenantsCount: allTenantsCount}
+    let summary = {tenantDemosCount: tenantDemosCount, tenantEnabledCount: tenantEnabledCount, tenantDisabledCount: tenantDisabledCount, allTenantsCount: allTenantsCount}
+    return summary;
   }
 }

@@ -1,16 +1,14 @@
-@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
 
 /* HEADER */
 .tenants{
  color: #276597;
- font-size: 16px;
  margin: 25px auto;
 }
 
 .header__title{
   padding: 0;
-  font-weight: 300;
-  letter-spacing: 0.1em;
+  font-weight: 200;
 }
 .summary{
   margin-top: 20px;
@@ -29,7 +27,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 
 .circle{
@@ -50,7 +48,7 @@
 }
 
 .summary__count--bigFont{
-  font-size: 4.5rem;
+  font-size: 3.2rem;
 }
 
 .summary__count--absolute{
@@ -65,7 +63,7 @@
 .summary-caption{
   width: 60px;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
 }
 /* END OF HEADER */
 
@@ -75,16 +73,13 @@
 
 
 .filters__label {
-  padding: 0;
+  padding: 0 0 25px 0;
   margin: 0;
-}
-
-.filters__label{
-  padding-bottom: 25px;
 }
 
 .filters__subtitle{
   margin-bottom: 10px;
+  font-size: 1.3rem;
 }
 
 .filters__search{
@@ -103,21 +98,31 @@
 .select-box{
   height: 50px;
   width: 100%;
-  background-color: #f8f8f8;
+  background-color: #eaf1f1;
 }
 
 .filters__input, .filters__select, .filters__submit-button{
-  background-color: #f8f8f8;
+  background-color: #eaf1f1;
   border: none;
   height: 50px;
+  outline: none;
 }
 .filters__submit-button{
   padding: 0;
   width: 10%;
 }
 
+button:active {
+  outline: none;
+  border: none;
+}
+
+.icon{
+  color: #276597;
+}
+
 .filters__select{
-  background: url('../img/expand-button.png') no-repeat right #f8f8f8;
+  background: url('../img/expand-button.png') no-repeat right #eaf1f1;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -129,11 +134,9 @@
 
 .box{
   margin: 0;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-top: 1.5px solid #eff0f0;
   padding: 20px 0;
   align-items: center;
-  font-size: 14px;
 }
 
 .box__item{
@@ -141,10 +144,8 @@
   padding: 0;
 }
 
-
-
 .tenants__item--name{
-  font-size: 2rem;
+  font-size: 1.5rem;
   order: 0;
 }
 .tenants__item--enabled{
@@ -153,7 +154,7 @@
 
 .tenants__item--date{
   color: grey;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   order: 2;
 }
 
@@ -165,7 +166,7 @@
   text-align: right;
 }
 
-@media(max-width:768px){
+@media(max-width:767px){
   .tenants__item--enabled{
     text-align: left;
   }

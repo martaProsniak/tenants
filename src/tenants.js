@@ -16,7 +16,6 @@ export class Tenants {
       this.tenantsRaw = this.tenantsRepository.tenants
       this.tenants = this.tenantsRaw
       this.summary = this.tenantsRepository.tenantsMetaSummary;
-      console.log(this.summary);
     });
   }
 

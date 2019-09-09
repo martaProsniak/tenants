@@ -27,17 +27,17 @@
     <div class="container">
       <div class="row filters">
         <label class="filters__label col-xs-12 col-md-8">
-          <p class='filters__subtitle'>Search:</p>
+          <p class='filters__subtitle'>Search</p>
           <div class='filters__search'>
             <input type="text" value.bind="searchCriteria" keyup.delegate="searchTenants(searchCriteria) & debounce:300"
               placeholder="Search for a tenant..." class="filters__input">
             <button click.delegate="searchTenants(searchCriteria)" class="filters__submit-button">
-              <span class="glyphicon glyphicon-search icon" aria-hidden="true"></span>
+           
             </button>
           </div>
         </label>
         <label class='filters__label col-xs-12 col-md-4'>
-          <p class='filters__subtitle'>Filter:</p>
+          <p class='filters__subtitle'>Filter</p>
           <div class="select-box">
             <select value.bind='filterCriteria' change.delegate="filterTenants(filterCriteria)" class='filters__select'>
               <option repeat.for="item of criteria" model.bind="item" class="filters__option">${item}</option>
