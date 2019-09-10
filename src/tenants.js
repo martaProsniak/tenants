@@ -11,12 +11,18 @@ export class Tenants {
   }
   
   activate(){
+    this.loadData();
+  }
+
+  loadData(){
     this.tenantsRepository.getTenantsDatabase()
     .then(() => {
       this.tenantsRaw = this.tenantsRepository.tenants
       this.tenants = this.tenantsRaw
       this.summary = this.tenantsRepository.tenantsMetaSummary;
     });
+    if (this.filterCriteria) this.filterCriteria = null;
+    if (this.searchCriteria) this.searchCriteria = null;
   }
 
   filterTenants(criteria){

@@ -2,7 +2,7 @@
   <require from="./assets/styles/tenants.css"></require>
   <section class="section tenants container-fluid">
     <header class='section__header container'>
-      <h1 class="header__title">${title}</h1>
+      <h1 class="header__title" click.delegate="loadData()" >${title}</h1>
       <div class="summary d-flex">
         <div class="summary__item">
           <p class="summary__count circle circle--blue">${summary.tenantEnabledCount}</p>
