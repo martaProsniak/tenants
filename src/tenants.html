@@ -24,6 +24,7 @@
     </header>
 
     <hr>
+
     <div class="container">
       <div class="row filters">
         <label class="filters__label col-xs-12 col-md-8">
@@ -31,9 +32,9 @@
           <div class='filters__search'>
             <input type="text" value.bind="searchCriteria" keyup.delegate="searchTenants(searchCriteria) & debounce:300"
               placeholder="Search for a tenant..." class="filters__input">
-            <button click.delegate="searchTenants(searchCriteria)" class="filters__submit-button">
-                <i class="fas fa-search filters__search-icon"></i>
-            </button>
+            <span class="filters__icon-span">
+                <i class="fas fa-search filters__icon"></i>
+            </span>
           </div>
         </label>
         <label class='filters__label col-xs-12 col-md-4'>
