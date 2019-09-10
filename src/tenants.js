@@ -3,7 +3,6 @@ import {TenantsRepository} from 'tenantsRepository'
 
 @inject(TenantsRepository)
 export class Tenants {
-  title = 'Tenants';
   constructor(tenantsRepository){
     this.tenantsRepository = tenantsRepository;
     this.tenantsDb = [];
