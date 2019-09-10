@@ -10,5 +10,6 @@ export class TenantsService {
   getTenantsDatabase() {
     const url = 'https://my-json-server.typicode.com/martaProsniak/tenants-data/';
     return this.httpClient.get(url + 'db')
+      .then(result => result.response)
   }
 }

@@ -11,15 +11,15 @@ export class TenantsRepository {
   }
 
   getTenantsDatabase() {
-    let promise = new Promise((resolve, reject) => {
-        this.tenantsService.getTenantsDatabase()
-          .then(result => {
-            this.tenantsDb = JSON.parse(result.response);
-            this.prepareData()
-            resolve(this.tenants)
-          })
-      });
-    return promise;
+    return this.tenantsService.getTenantsDatabase()
+    .then(response =>{
+      this.tenantsDb = JSON.parse(response)
+      this.prepareData();
+    })
+    .catch(err => {
+      let message = 'Something wen wrong! Status code: ' + err.statusCode
+      console.log(message)
+    })
   }
 
   filterTenants(filterCriteria, tenants) {

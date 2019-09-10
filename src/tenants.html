@@ -45,7 +45,7 @@
           </div>
         </label>
       </div>
-
+      <div if.bind="message">${message}</div>
       <div repeat.for="tenant of tenants" class="row box tenants">
         <p class="col-12 col-md-10 box__item tenants__item tenants__item--name">${tenant.TenantDisplayName}</p>
         <p class="col-6 col-md-2 box__item tenants__item tenants__item--enabled" if.bind="tenant.IsEnabled">Enabled</p>
