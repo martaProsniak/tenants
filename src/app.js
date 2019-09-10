@@ -1,3 +1,3 @@
 export class App{
-  title = 'Tenants'
+  title = 'Tenants';
 }
